@@ -1,5 +1,13 @@
 const ALBUMS = [
   {
+    title: "Stand Alone",
+    year: "2015",
+    cert: "EP — DEBUT",
+    tracks: 5,
+    spotifyId: "2F66LRNUc5LQRC9qEVhfeu",
+    cover: "https://i.scdn.co/image/ab67616d0000b2738690b099a7824870fb67294f",
+  },
+  {
     title: "If I Know Me",
     year: "2018",
     cert: "2× PLATINUM",
@@ -30,6 +38,14 @@ const ALBUMS = [
     tracks: 37,
     spotifyId: "5IZ8sY5FjtL9hloXpv0XbD",
     cover: "https://i.scdn.co/image/ab67616d0000b27335ea219ce47813b5e2dc3745",
+  },
+  {
+    title: "Stand Alone (10th Anniversary Deluxe)",
+    year: "2025",
+    cert: "DELUXE EDITION",
+    tracks: 12,
+    spotifyId: "5DDVH0WdBqbQg7XriGDFEw",
+    cover: "https://i.scdn.co/image/ab67616d0000b2734cf3f116ed6e3f294376d03a",
   },
 ];
 
