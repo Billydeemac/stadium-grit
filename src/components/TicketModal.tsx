@@ -112,7 +112,7 @@ export function TicketModal({
                       </div>
                       <div className="text-right">
                         <div className="display text-dust text-4xl">${t.price}</div>
-                        <button onClick={() => checkout(t)} className="mt-2 label bg-caution text-midnight px-4 py-2 hover:bg-dust">
+                        <button onClick={() => checkout(t, i)} className="mt-2 label bg-caution text-midnight px-4 py-2 hover:bg-dust">
                           CLAIM →
                         </button>
                       </div>
