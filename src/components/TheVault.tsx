@@ -1,8 +1,36 @@
 const ALBUMS = [
-  { title: "If I Know Me", year: "2018", cert: "2× PLATINUM", tracks: 14 },
-  { title: "Dangerous: The Double Album", year: "2021", cert: "DIAMOND", tracks: 30 },
-  { title: "One Thing at a Time", year: "2023", cert: "5× PLATINUM", tracks: 36 },
-  { title: "I'm The Problem", year: "2025", cert: "3× PLATINUM", tracks: 37 },
+  {
+    title: "If I Know Me",
+    year: "2018",
+    cert: "2× PLATINUM",
+    tracks: 14,
+    spotifyId: "6WKNoni6aDzCTUN1CtJJ5R",
+    cover: "https://i.scdn.co/image/ab67616d0000b2731215aac0c23dd8c31f5c14c1",
+  },
+  {
+    title: "Dangerous: The Double Album",
+    year: "2021",
+    cert: "DIAMOND",
+    tracks: 30,
+    spotifyId: "6JlCkqkqobGirPsaleJpFr",
+    cover: "https://i.scdn.co/image/ab67616d0000b2737d6813fd233f3bc4977cceca",
+  },
+  {
+    title: "One Thing At A Time",
+    year: "2023",
+    cert: "5× PLATINUM",
+    tracks: 36,
+    spotifyId: "6i7mF7whyRJuLJ4ogbH2wh",
+    cover: "https://i.scdn.co/image/ab67616d0000b273705079df9a25a28b452c1fc9",
+  },
+  {
+    title: "I'm The Problem",
+    year: "2025",
+    cert: "3× PLATINUM",
+    tracks: 37,
+    spotifyId: "5IZ8sY5FjtL9hloXpv0XbD",
+    cover: "https://i.scdn.co/image/ab67616d0000b27335ea219ce47813b5e2dc3745",
+  },
 ];
 
 export function TheVault() {
@@ -11,13 +39,23 @@ export function TheVault() {
       <div className="mb-14">
         <div className="label text-caution mb-3">SECTION 03 — DISCOGRAPHY</div>
         <h2 className="display text-dust text-6xl md:text-8xl">The Vault</h2>
+        <p className="label text-dust/60 mt-4 max-w-xl">
+          TAP ANY RECORD — ROUTES TO YOUR STREAMING APP OF CHOICE.
+        </p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {ALBUMS.map((a, i) => (
-          <div key={i} className="group relative border-2 border-chrome/30 bg-midnight p-6 hover:border-caution transition-colors">
+        {ALBUMS.map((a) => (
+          <a
+            key={a.spotifyId}
+            href={`https://album.link/s/${a.spotifyId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Stream ${a.title} by Morgan Wallen`}
+            className="group relative block border-2 border-chrome/30 bg-midnight p-6 hover:border-caution transition-colors"
+          >
             <div className="relative aspect-square mb-5 overflow-hidden bg-midnight-deep">
-              {/* Vinyl */}
+              {/* Vinyl slides out on hover */}
               <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 group-hover:translate-x-[35%] group-hover:rotate-180">
                 <div className="relative size-[85%] rounded-full bg-gradient-to-br from-black to-neutral-900 group-hover:animate-spin-slow">
                   {[...Array(8)].map((_, j) => (
@@ -28,10 +66,19 @@ export function TheVault() {
                   </div>
                 </div>
               </div>
-              {/* Sleeve */}
-              <div className="absolute inset-0 bg-gradient-to-br from-denim/40 via-midnight to-midnight-deep border border-chrome/20 flex flex-col justify-end p-4">
-                <div className="display text-dust text-3xl leading-none">{a.title.split(" ")[0]}</div>
-                <div className="label text-caution mt-2">{a.year}</div>
+              {/* Real album cover sleeve */}
+              <div className="absolute inset-0 border border-chrome/20">
+                <img
+                  src={a.cover}
+                  alt={`${a.title} album cover`}
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-midnight-deep/80 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 flex items-center justify-between">
+                  <span className="label text-caution">{a.year}</span>
+                  <span className="label text-dust opacity-0 group-hover:opacity-100 transition-opacity">▶ PLAY</span>
+                </div>
               </div>
             </div>
             <div className="display text-dust text-2xl">{a.title}</div>
@@ -39,9 +86,13 @@ export function TheVault() {
               <span className="label text-caution">{a.cert}</span>
               <span className="label text-dust/50">{a.tracks} TRACKS</span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
+
+      <p className="label text-dust/40 mt-10 text-center">
+        POWERED BY ODESLI — OPENS IN SPOTIFY, APPLE MUSIC, YOUTUBE MUSIC, AMAZON & MORE.
+      </p>
     </section>
   );
 }
