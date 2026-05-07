@@ -39,6 +39,14 @@ const ALBUMS = [
     spotifyId: "5IZ8sY5FjtL9hloXpv0XbD",
     cover: "https://i.scdn.co/image/ab67616d0000b27335ea219ce47813b5e2dc3745",
   },
+  {
+    title: "Stand Alone (10th Anniversary Deluxe)",
+    year: "2025",
+    cert: "DELUXE EDITION",
+    tracks: 12,
+    spotifyId: "5DDVH0WdBqbQg7XriGDFEw",
+    cover: "https://i.scdn.co/image/ab67616d0000b2734cf3f116ed6e3f294376d03a",
+  },
 ];
 
 export function TheVault() {
