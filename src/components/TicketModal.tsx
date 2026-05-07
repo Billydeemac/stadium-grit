@@ -39,14 +39,16 @@ export function TicketModal({
 
   if (!open) return null;
 
-  const checkout = (tier: typeof TIERS[number]) => {
+  const checkout = (tier: typeof TIERS[number], idx: number) => {
     const params = new URLSearchParams({
+      mode: "ticket",
+      ticket: String(idx + 1),
+      tier: tier.name,
+      price: String(tier.price),
+      city: city ?? "",
       tour: "STILL_THE_PROBLEM_2026",
-      stop: city ?? "",
-      tier: tier.name.toUpperCase().replace(/\s+/g, "_"),
-      manifest: String(tier.price),
     });
-    window.location.href = `/checkout.html?${params.toString()}`;
+    window.location.href = `/ticket-checkout.html?${params.toString()}`;
   };
 
   return (
@@ -110,7 +112,7 @@ export function TicketModal({
                       </div>
                       <div className="text-right">
                         <div className="display text-dust text-4xl">${t.price}</div>
-                        <button onClick={() => checkout(t)} className="mt-2 label bg-caution text-midnight px-4 py-2 hover:bg-dust">
+                        <button onClick={() => checkout(t, i)} className="mt-2 label bg-caution text-midnight px-4 py-2 hover:bg-dust">
                           CLAIM →
                         </button>
                       </div>

