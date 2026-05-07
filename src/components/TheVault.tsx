@@ -1,5 +1,13 @@
 const ALBUMS = [
   {
+    title: "Stand Alone",
+    year: "2015",
+    cert: "EP — DEBUT",
+    tracks: 5,
+    spotifyId: "2F66LRNUc5LQRC9qEVhfeu",
+    cover: "https://i.scdn.co/image/ab67616d0000b2738690b099a7824870fb67294f",
+  },
+  {
     title: "If I Know Me",
     year: "2018",
     cert: "2× PLATINUM",
