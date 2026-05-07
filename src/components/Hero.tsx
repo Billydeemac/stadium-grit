@@ -69,9 +69,9 @@ export function Hero({ onClaim }: { onClaim: () => void }) {
         </div>
 
         <h1 className="display text-dust text-[18vw] md:text-[14vw] leading-[0.78]">
-          <span className="block">ONE</span>
-          <span className="block outlined-text">NIGHT</span>
-          <span className="block">AT&nbsp;A&nbsp;TIME</span>
+          <span className="block">STILL</span>
+          <span className="block outlined-text">THE</span>
+          <span className="block">PROBLEM</span>
         </h1>
 
         <div className="mt-10 grid md:grid-cols-2 gap-8 items-end">
