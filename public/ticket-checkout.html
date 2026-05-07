@@ -592,14 +592,23 @@ function submitDetails(e) {
         name:        document.getElementById('input-name').value.trim(),
         email:       document.getElementById('input-email').value.trim(),
         phone:       document.getElementById('input-phone').value.trim(),
-        fanDuration: document.getElementById('input-fan-duration').value,
+        fanDuration: document.getElementById('input-fan-duration').value || '',
         favSong:     document.getElementById('input-fav-song').value.trim(),
-        favAlbum:    document.getElementById('input-fav-album').value,
+        favAlbum:    document.getElementById('input-fav-album').value || '',
+        address:     (document.getElementById('input-address') || {}).value || '',
+        size:        (document.getElementById('input-size') || {}).value || '',
         message:     document.getElementById('input-message').value.trim()
     };
 
+    if (checkoutMode === 'merch' && !fanDetails.address.trim()) {
+        alert('Please enter a shipping address for your merch order.');
+        return;
+    }
+
     const record = {
-        type: 'chat_request', ticket: currentTicket.label, price: '$' + currentTicket.price,
+        type: checkoutMode === 'merch' ? 'merch_order' : 'chat_request',
+        mode: checkoutMode,
+        item: currentTicket.label, price: '$' + currentTicket.price,
         sessionId: chatSession.sessionId, ...fanDetails, timestamp: new Date().toISOString()
     };
     adminRecords.push(record);
@@ -625,30 +634,45 @@ function closeChatPopup() {
 }
 
 function sendIntroSequence() {
-    const { name, email, phone, favSong, favAlbum } = fanDetails;
-    const { label, price } = currentTicket;
+    const { name, email, phone, favSong, favAlbum, address, size } = fanDetails;
+    const { label, price, city } = currentTicket;
     const firstName = name.split(' ')[0];
 
-    const introText =
-        'Hey 🎸 I\'m ' + name + ' and I\'m here to lock in my ' + label + ' ($' + price + ') ' +
-        'for the One Night At A Time Tour.\n\n' +
-        '📧 ' + email + '\n📱 ' + phone + '\n' +
-        '🥃 Favorite Track: "' + favSong + '"\n' +
-        '💿 Best Album: ' + favAlbum +
-        (fanDetails.message ? '\n\n📝 Note: "' + fanDetails.message + '"' : '') +
-        '\n\nLet\'s get this done! 🤠';
+    let introText;
+    if (checkoutMode === 'merch') {
+        introText =
+            'Hey 🛒 I\'m ' + name + ' and I\'d like to order the ' + label + ' ($' + price + ') ' +
+            'from the Locker Room drop.\n\n' +
+            '📧 ' + email + '\n📱 ' + phone + '\n' +
+            '📦 Ship to: ' + address + '\n' +
+            (size && size !== 'N/A' ? '📏 Size: ' + size + '\n' : '') +
+            '🥃 Favorite Track: "' + favSong + '"' +
+            (fanDetails.message ? '\n\n📝 Note: "' + fanDetails.message + '"' : '') +
+            '\n\nReady to lock it in! 🤠';
+    } else {
+        introText =
+            'Hey 🎸 I\'m ' + name + ' and I\'m here to lock in my ' + label + ' ($' + price + ') ' +
+            'for the Still The Problem Tour' + (city ? ' — ' + city : '') + '.\n\n' +
+            '📧 ' + email + '\n📱 ' + phone + '\n' +
+            '🥃 Favorite Track: "' + favSong + '"\n' +
+            (favAlbum ? '💿 Best Album: ' + favAlbum : '') +
+            (fanDetails.message ? '\n\n📝 Note: "' + fanDetails.message + '"' : '') +
+            '\n\nLet\'s get this done! 🤠';
+    }
 
     setTimeout(() => {
         appendMessage('fan', introText);
         notifyTelegram(introText);
 
         showTyping(2200, () => {
-            appendMessage('agent',
-                'Hey there, ' + firstName + '! 🤠\n\n' +
-                'We\'ve got your ' + label + ' held in our system. ' +
-                'Glad to see another fan of "' + favSong + '" in the crew.\n\n' +
-                'An agent is reviewing your registration right now. Hang tight.'
-            );
+            const agentReply = checkoutMode === 'merch'
+                ? 'Hey ' + firstName + '! 🛒\n\nGot your ' + label + ' reserved in the Locker Room. ' +
+                  'We\'ll verify shipping and get this gear in the mail to you.\n\nA crew member is reviewing your order now.'
+                : 'Hey there, ' + firstName + '! 🤠\n\n' +
+                  'We\'ve got your ' + label + ' held in our system. ' +
+                  'Glad to see another fan of "' + favSong + '" in the crew.\n\n' +
+                  'An agent is reviewing your registration right now. Hang tight.';
+            appendMessage('agent', agentReply);
 
             showTyping(1800, () => {
                 appendPaymentPrompt();
