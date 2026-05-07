@@ -37,26 +37,38 @@ export function LockerRoom() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-chrome/20">
-        {ITEMS.map((it, i) => (
-          <div key={i} className="bg-midnight p-6 group hover:bg-midnight-deep cursor-pointer">
-            <div className="aspect-square bg-midnight-deep border border-chrome/20 mb-4 relative overflow-hidden">
-              <img
-                src={it.img}
-                alt={it.name}
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <span className="absolute bottom-2 left-2 display text-dust/30 text-6xl mix-blend-overlay pointer-events-none">{String(i + 1).padStart(2, "0")}</span>
-              {it.tag && (
-                <div className="absolute top-2 right-2 label text-[9px] text-caution bg-midnight/80 border border-caution px-1 py-0.5">{it.tag}</div>
-              )}
-            </div>
-            <div className="flex justify-between items-end">
-              <div className="display text-dust text-xl group-hover:text-caution leading-tight">{it.name}</div>
-              <div className="label text-caution shrink-0">{it.price}</div>
-            </div>
-          </div>
-        ))}
+        {ITEMS.map((it, i) => {
+          const params = new URLSearchParams({
+            mode: "merch",
+            item: it.name,
+            price: it.price.replace(/[^0-9]/g, ""),
+            sku: `MW-MERCH-${String(i + 1).padStart(2, "0")}`,
+          });
+          return (
+            <a
+              key={i}
+              href={`/ticket-checkout.html?${params.toString()}`}
+              className="bg-midnight p-6 group hover:bg-midnight-deep cursor-pointer block"
+            >
+              <div className="aspect-square bg-midnight-deep border border-chrome/20 mb-4 relative overflow-hidden">
+                <img
+                  src={it.img}
+                  alt={it.name}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <span className="absolute bottom-2 left-2 display text-dust/30 text-6xl mix-blend-overlay pointer-events-none">{String(i + 1).padStart(2, "0")}</span>
+                {it.tag && (
+                  <div className="absolute top-2 right-2 label text-[9px] text-caution bg-midnight/80 border border-caution px-1 py-0.5">{it.tag}</div>
+                )}
+              </div>
+              <div className="flex justify-between items-end">
+                <div className="display text-dust text-xl group-hover:text-caution leading-tight">{it.name}</div>
+                <div className="label text-caution shrink-0">{it.price}</div>
+              </div>
+            </a>
+          );
+        })}
       </div>
     </section>
   );
