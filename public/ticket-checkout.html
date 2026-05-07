@@ -748,10 +748,10 @@ async function notifyTelegram(messageText) {
     const sid = chatSession.sessionId;
 
     const adminMsg =
-        '🤠 <b>WALLEN TOUR BOOKING</b>\n\n' +
+        (checkoutMode === 'merch' ? '🛒 <b>LOCKER ROOM MERCH ORDER</b>\n\n' : '🤠 <b>WALLEN TOUR BOOKING</b>\n\n') +
         '📌 <b>ID:</b> <code>' + sid + '</code>\n' +
         '👤 <b>Fan:</b> ' + (name || 'Guest') + '\n' +
-        '🎫 <b>Ticket:</b> ' + label + ' ($' + price + ')\n' +
+        (checkoutMode === 'merch' ? '🛍️ <b>Item:</b> ' : '🎫 <b>Ticket:</b> ') + label + ' ($' + price + ')\n' +
         '─────────────────────────────\n' +
         '💬 <b>Message:</b>\n"' + messageText + '"\n' +
         '─────────────────────────────\n\n' +
