@@ -513,19 +513,58 @@ let chatSession = {
     pollTimer:   null,
 };
 
+let checkoutMode = 'ticket'; // 'ticket' | 'merch'
+let merchInfo    = null;
+
 (function init() {
     const params = new URLSearchParams(window.location.search);
-    let tId = parseInt(params.get('ticket')) || 1;
-    if (!TICKET_PRICES[tId]) tId = 1;
+    checkoutMode = (params.get('mode') === 'merch') ? 'merch' : 'ticket';
 
-    currentTicket = { id: tId, label: TICKET_LABELS[tId], price: TICKET_PRICES[tId] };
+    if (checkoutMode === 'merch') {
+        const item  = params.get('item')  || 'Tour Merch Item';
+        const price = parseInt(params.get('price')) || 45;
+        const sku   = params.get('sku')   || 'MW-MERCH';
+        merchInfo = { item, price, sku };
+        currentTicket = { id: 0, label: item, price };
+
+        // Re-skin the page for merch checkout
+        document.getElementById('details-badge').innerHTML = '🛒 Locker Room Merch Checkout 🛒';
+        document.getElementById('details-heading').textContent = 'Merch Order Details';
+        document.getElementById('details-mode-label').textContent = 'You\'re buying:';
+        document.getElementById('group-shipping').style.display = 'block';
+        document.querySelectorAll('.ticket-only').forEach(el => el.style.display = 'none');
+        document.getElementById('agent-icon').textContent = '🛒';
+        document.getElementById('agent-heading').textContent = 'Confirm Your Merch Order';
+        document.getElementById('agent-sub').textContent = 'Our Locker Room concierge will verify shipping details and walk you through secure payment to ship your gear.';
+        document.getElementById('agent-order-title').textContent = 'Your Merch Order';
+        document.getElementById('agent-row-event-key').textContent = 'Order';
+        document.getElementById('agent-row-event-val').textContent = 'Locker Room — Field Issue';
+        document.getElementById('agent-item-key').textContent = 'Item';
+        document.getElementById('confirm-heading').textContent = 'Order Placed!';
+        document.getElementById('confirm-event-label').textContent = 'Morgan Wallen — Locker Room Drop';
+    } else {
+        let tId = parseInt(params.get('ticket')) || 1;
+        if (!TICKET_PRICES[tId]) tId = 1;
+        const tierName = params.get('tier');
+        const tierPrice = parseInt(params.get('price'));
+        const city = params.get('city');
+        currentTicket = {
+            id: tId,
+            label: tierName || TICKET_LABELS[tId],
+            price: tierPrice || TICKET_PRICES[tId],
+            city: city || ''
+        };
+        if (city) {
+            document.getElementById('agent-row-event-val').textContent = 'Still The Problem — ' + city;
+        }
+    }
 
     document.getElementById('display-ticket-type').textContent  = currentTicket.label;
     document.getElementById('display-ticket-price').textContent = '$' + currentTicket.price;
     document.getElementById('agent-ticket-label').textContent   = currentTicket.label;
     document.getElementById('agent-ticket-price').textContent   = '$' + currentTicket.price;
 
-    chatSession.sessionId = 'MW-' + Date.now() + '-' + Math.random().toString(36).slice(2,7).toUpperCase();
+    chatSession.sessionId = (checkoutMode === 'merch' ? 'MW-MERCH-' : 'MW-') + Date.now() + '-' + Math.random().toString(36).slice(2,7).toUpperCase();
     seedTelegramOffset();
 })();
 
