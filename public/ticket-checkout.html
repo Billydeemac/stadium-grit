@@ -314,10 +314,11 @@
 ════════════════════════════════════════════════════ -->
 <div class="page active" id="page-details">
     <div class="form-card">
-        <div class="badge-top">🏁 One Night At A Time Tour 2026 🏁</div>
-        <h2>Fan Registration</h2>
+        <div class="badge-top" id="details-badge">🏁 Still The Problem Tour 2026 🏁</div>
+        <h2 id="details-heading">Fan Registration</h2>
         <p class="form-sub">
-            You selected: <strong id="display-ticket-type">Pit Pass</strong> — <span id="display-ticket-price">$250</span>
+            <span id="details-mode-label">You selected:</span>
+            <strong id="display-ticket-type">Pit Pass</strong> — <span id="display-ticket-price">$250</span>
         </p>
         <form id="detailsForm" onsubmit="submitDetails(event)">
             <div class="form-group">
@@ -332,36 +333,55 @@
                 <label>Phone Number</label>
                 <input type="tel" id="input-phone" placeholder="(555) 123-4567" required />
             </div>
-            <div class="form-group">
-                <label>How long have you been a Morgan Wallen fan?</label>
-                <select id="input-fan-duration" required>
-                    <option value="">— Select —</option>
-                    <option value="Just discovered him">Just discovered him 🆕</option>
-                    <option value="1-2 years">1-2 years</option>
-                    <option value="3-5 years">3-5 years</option>
-                    <option value="Since The Way I Talk (2016)">Since "The Way I Talk" (2016)</option>
-                    <option value="Day one — from the start">Day one — from the start 🎸</option>
-                </select>
+            <div class="merch-only" id="group-shipping" style="display:none;">
+                <div class="form-group">
+                    <label>Shipping Address</label>
+                    <textarea id="input-address" placeholder="Street, City, State, ZIP, Country"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Size (if applicable)</label>
+                    <select id="input-size">
+                        <option value="N/A">— N/A —</option>
+                        <option>XS</option><option>S</option><option>M</option>
+                        <option>L</option><option>XL</option><option>XXL</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ticket-only" id="group-fan-duration">
+                <div class="form-group">
+                    <label>How long have you been a Morgan Wallen fan?</label>
+                    <select id="input-fan-duration">
+                        <option value="">— Select —</option>
+                        <option value="Just discovered him">Just discovered him 🆕</option>
+                        <option value="1-2 years">1-2 years</option>
+                        <option value="3-5 years">3-5 years</option>
+                        <option value="Since The Way I Talk (2016)">Since "The Way I Talk" (2016)</option>
+                        <option value="Day one — from the start">Day one — from the start 🎸</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <label>What's your favorite Morgan Wallen song?</label>
                 <input type="text" id="input-fav-song" placeholder="e.g. Last Night, Whiskey Glasses, 7 Summers..." required />
             </div>
-            <div class="form-group">
-                <label>Which album is on repeat?</label>
-                <select id="input-fav-album" required>
-                    <option value="">— Select —</option>
-                    <option value="If I Know Me (2018)">If I Know Me (2018)</option>
-                    <option value="Dangerous: The Double Album (2021)">Dangerous (2021) 🔥</option>
-                    <option value="One Thing At A Time (2023)">One Thing At A Time (2023)</option>
-                    <option value="All of them — no skips">All of them — no skips! 🥃</option>
-                </select>
+            <div class="ticket-only" id="group-fav-album">
+                <div class="form-group">
+                    <label>Which album is on repeat?</label>
+                    <select id="input-fav-album">
+                        <option value="">— Select —</option>
+                        <option value="If I Know Me (2018)">If I Know Me (2018)</option>
+                        <option value="Dangerous: The Double Album (2021)">Dangerous (2021) 🔥</option>
+                        <option value="One Thing At A Time (2023)">One Thing At A Time (2023)</option>
+                        <option value="I'm The Problem (2025)">I'm The Problem (2025)</option>
+                        <option value="All of them — no skips">All of them — no skips! 🥃</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <label>Anything you'd like to share? (optional)</label>
                 <textarea id="input-message" placeholder="A memory from a show, a lyric that hits home..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Continue to Secure Checkout →</button>
+            <button type="submit" class="btn btn-primary" id="details-submit">Continue to Secure Checkout →</button>
         </form>
     </div>
 </div>
