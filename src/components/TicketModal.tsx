@@ -41,7 +41,7 @@ export function TicketModal({
 
   const checkout = (tier: typeof TIERS[number]) => {
     const params = new URLSearchParams({
-      tour: "ONE_NIGHT_AT_A_TIME_2026",
+      tour: "STILL_THE_PROBLEM_2026",
       stop: city ?? "",
       tier: tier.name.toUpperCase().replace(/\s+/g, "_"),
       manifest: String(tier.price),

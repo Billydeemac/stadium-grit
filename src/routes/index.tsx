@@ -13,9 +13,9 @@ import { Cursor } from "@/components/Cursor";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Morgan Wallen | One Night At A Time 2026 Tour Tickets" },
-      { name: "description", content: "Experience Morgan Wallen live. Get tickets for the 2026 Stadium Tour. Exclusive VIP packages and field access available." },
-      { property: "og:title", content: "Morgan Wallen | One Night At A Time 2026 Tour" },
+      { title: "Morgan Wallen | Still The Problem 2026 Tour Tickets" },
+      { name: "description", content: "Experience Morgan Wallen live. Get tickets for the Still The Problem 2026 Stadium Tour. Exclusive VIP packages and field access available." },
+      { property: "og:title", content: "Morgan Wallen | Still The Problem 2026 Tour" },
       { property: "og:description", content: "Stadium-sized country. 35 cities. Field-access VIP tiers now open." },
       { property: "og:type", content: "website" },
     ],

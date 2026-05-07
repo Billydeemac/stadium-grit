@@ -1,12 +1,18 @@
 import merch from "@/assets/merch.jpg";
+import hat from "@/assets/merch-hat.jpg";
+import tee from "@/assets/merch-tee.jpg";
+import hoodie from "@/assets/merch-hoodie.jpg";
+import glass from "@/assets/merch-glass.jpg";
+import vinyl from "@/assets/merch-vinyl.jpg";
+import jersey from "@/assets/merch-jersey.jpg";
 
 const ITEMS = [
-  { name: "Tour Trucker · Dust", price: "$45", tag: "LIMITED" },
-  { name: "Distressed Tour Tee", price: "$60", tag: "NEW" },
-  { name: "MW Logo Hoodie", price: "$95", tag: "" },
-  { name: "Whiskey Glass · 7 Summers", price: "$32", tag: "PAIR" },
-  { name: "Tour Vinyl LP", price: "$48", tag: "GOLD" },
-  { name: "Custom Field Jersey", price: "$120", tag: "VIP ONLY" },
+  { name: "Still The Problem Trucker", price: "$45", tag: "LIMITED", img: hat },
+  { name: "Still The Problem Tour Tee", price: "$60", tag: "NEW", img: tee },
+  { name: "MW Distressed Hoodie", price: "$95", tag: "", img: hoodie },
+  { name: "7 Summers Whiskey Glass", price: "$32", tag: "PAIR", img: glass },
+  { name: "Still The Problem Tour Vinyl", price: "$48", tag: "GOLD", img: vinyl },
+  { name: "Wallen Field Jersey", price: "$120", tag: "VIP ONLY", img: jersey },
 ];
 
 export function LockerRoom() {
@@ -33,10 +39,16 @@ export function LockerRoom() {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-chrome/20">
         {ITEMS.map((it, i) => (
           <div key={i} className="bg-midnight p-6 group hover:bg-midnight-deep cursor-pointer">
-            <div className="aspect-square bg-gradient-to-br from-denim/30 to-midnight-deep border border-chrome/20 mb-4 flex items-center justify-center relative overflow-hidden">
-              <span className="display text-dust/10 text-9xl">{String(i + 1).padStart(2, "0")}</span>
+            <div className="aspect-square bg-midnight-deep border border-chrome/20 mb-4 relative overflow-hidden">
+              <img
+                src={it.img}
+                alt={it.name}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <span className="absolute bottom-2 left-2 display text-dust/30 text-6xl mix-blend-overlay pointer-events-none">{String(i + 1).padStart(2, "0")}</span>
               {it.tag && (
-                <div className="absolute top-2 right-2 label text-[9px] text-caution border border-caution px-1">{it.tag}</div>
+                <div className="absolute top-2 right-2 label text-[9px] text-caution bg-midnight/80 border border-caution px-1 py-0.5">{it.tag}</div>
               )}
             </div>
             <div className="flex justify-between items-end">

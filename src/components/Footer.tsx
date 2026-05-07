@@ -3,7 +3,7 @@ export function Footer() {
     <footer className="relative bg-midnight-deep border-t-2 border-caution px-6 md:px-12 py-16 distress">
       <div className="grid md:grid-cols-4 gap-10 mb-12">
         <div className="md:col-span-2">
-          <div className="display text-dust text-5xl md:text-6xl">ONE NIGHT.<br/>ONE TOUR.</div>
+          <div className="display text-dust text-5xl md:text-6xl">STILL THE<br/>PROBLEM.</div>
           <div className="label text-caution mt-4">EST. KNOXVILLE · TENNESSEE</div>
         </div>
         <div>
