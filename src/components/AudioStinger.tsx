@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const SRC = "/tour-anthem.mp3";
+const SRC = "/MW_intro_.mp3";
 
 export function AudioStinger() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -11,11 +11,9 @@ export function AudioStinger() {
     if (!audio) return;
     audio.volume = 0.55;
 
-    // Try to autoplay immediately. Most browsers will block until the user interacts.
     const tryPlay = () => audio.play().then(() => setPlaying(true)).catch(() => {});
     tryPlay();
 
-    // Fallback: start playback on the first user gesture anywhere on the page.
     const onGesture = () => {
       tryPlay();
       window.removeEventListener("pointerdown", onGesture);
@@ -52,7 +50,7 @@ export function AudioStinger() {
 
   return (
     <>
-      <audio ref={audioRef} src={SRC} loop preload="auto" autoPlay playsInline />
+      <audio ref={audioRef} src={SRC} loop autoPlay playsInline preload="auto" />
       <div className="fixed bottom-6 right-6 z-40 hidden md:flex items-center gap-3 border-2 border-chrome/40 bg-midnight-deep/90 backdrop-blur px-4 py-3">
         <button
           onClick={toggle}
