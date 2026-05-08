@@ -1,3 +1,4 @@
+import { useState } from "react";
 import merch from "@/assets/merch.jpg";
 import hat from "@/assets/merch-hat.jpg";
 import tee from "@/assets/merch-tee.jpg";
