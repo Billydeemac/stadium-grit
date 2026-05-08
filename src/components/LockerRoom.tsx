@@ -36,7 +36,7 @@ export function LockerRoom() {
     <section id="locker" className="relative px-6 md:px-12 py-24 distress bg-midnight-deep">
       <div className="grid lg:grid-cols-2 gap-12 mb-16">
         <div>
-          <div className="label text-caution mb-3">SECTION 05 — LOOK-BOOK</div>
+          <div className="label text-caution mb-3">SECTION 02 — LOOK-BOOK</div>
           <h2 className="display text-dust text-6xl md:text-8xl">Locker Room</h2>
           <p className="mt-4 text-dust/70 max-w-md">
             Field-issued gear. Made heavy, worn hard. Each piece numbered and stamped from the dressing-room floor of Neyland Stadium.
