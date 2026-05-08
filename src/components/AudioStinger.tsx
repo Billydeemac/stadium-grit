@@ -51,7 +51,7 @@ export function AudioStinger() {
   return (
     <>
       <audio ref={audioRef} src={SRC} loop autoPlay playsInline preload="auto" />
-      <div className="fixed bottom-6 right-6 z-40 hidden md:flex items-center gap-3 border-2 border-chrome/40 bg-midnight-deep/90 backdrop-blur px-4 py-3">
+      <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3 border-2 border-chrome/40 bg-midnight-deep/90 backdrop-blur px-4 py-3">
         <button
           onClick={toggle}
           className="size-10 bg-caution text-midnight flex items-center justify-center hover:bg-dust"
