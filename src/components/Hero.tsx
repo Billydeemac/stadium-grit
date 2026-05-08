@@ -30,7 +30,14 @@ function useCountdown(target: Date) {
 }
 
 export function Hero({ onClaim }: { onClaim: () => void }) {
-  const target = new Date("2026-04-17T20:00:00-04:00");
+  const nextShow = useMemo(() => {
+    const now = Date.now();
+    return (
+      TOUR_DATES.find((s) => new Date(s.iso).getTime() > now) ??
+      TOUR_DATES[TOUR_DATES.length - 1]
+    );
+  }, []);
+  const target = new Date(nextShow.iso);
   const { d, h, m, s } = useCountdown(target);
   const [scrollY, setScrollY] = useState(0);
 
