@@ -320,6 +320,17 @@
             <span id="details-mode-label">You selected:</span>
             <strong id="display-ticket-type">Pit Pass</strong> — <span id="display-ticket-price">$250</span>
         </p>
+        <div class="form-group">
+            <label id="qty-label">Quantity</label>
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+                <button type="button" onclick="changeQty(-1)" style="width:44px; height:44px; border-radius:12px; border:1px solid rgba(243,156,18,0.4); background:rgba(243,156,18,0.08); color:#f39c12; font-size:1.3rem; cursor:pointer;">−</button>
+                <input type="number" id="input-qty" min="1" max="20" value="1" style="flex:1; text-align:center; font-size:1.1rem; font-weight:700;" oninput="updateQty()" />
+                <button type="button" onclick="changeQty(1)" style="width:44px; height:44px; border-radius:12px; border:1px solid rgba(243,156,18,0.4); background:rgba(243,156,18,0.08); color:#f39c12; font-size:1.3rem; cursor:pointer;">+</button>
+            </div>
+            <div style="margin-top:0.55rem; font-size:0.8rem; color:#999;">
+                Subtotal: <strong id="qty-subtotal" style="color:#f39c12;">$250</strong>
+            </div>
+        </div>
         <form id="detailsForm" onsubmit="submitDetails(event)">
             <div class="form-group">
                 <label>Full Name</label>
