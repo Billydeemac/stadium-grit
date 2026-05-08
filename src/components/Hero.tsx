@@ -1,5 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import heroImg from "@/assets/hero-stadium.jpg";
+
+// Tour dates (kept in sync with TheLineup). ISO with -04:00 (ET).
+const TOUR_DATES: { iso: string; city: string; venue: string }[] = [
+  { iso: "2026-04-17T20:00:00-04:00", city: "Knoxville, TN", venue: "Neyland Stadium" },
+  { iso: "2026-04-24T20:00:00-04:00", city: "East Rutherford, NJ", venue: "MetLife Stadium" },
+  { iso: "2026-05-02T20:00:00-07:00", city: "Inglewood, CA", venue: "SoFi Stadium" },
+  { iso: "2026-05-09T20:00:00-05:00", city: "Nashville, TN", venue: "Nissan Stadium" },
+  { iso: "2026-05-16T20:00:00-05:00", city: "Arlington, TX", venue: "AT&T Stadium" },
+  { iso: "2026-05-23T20:00:00-04:00", city: "Atlanta, GA", venue: "Mercedes-Benz Stadium" },
+  { iso: "2026-06-06T20:00:00-05:00", city: "Chicago, IL", venue: "Soldier Field" },
+  { iso: "2026-06-13T20:00:00-06:00", city: "Denver, CO", venue: "Empower Field" },
+  { iso: "2026-06-27T20:00:00-07:00", city: "Seattle, WA", venue: "Lumen Field" },
+  { iso: "2026-07-11T20:00:00-04:00", city: "Foxborough, MA", venue: "Gillette Stadium" },
+];
 
 function useCountdown(target: Date) {
   const [now, setNow] = useState(() => new Date());
@@ -16,7 +30,14 @@ function useCountdown(target: Date) {
 }
 
 export function Hero({ onClaim }: { onClaim: () => void }) {
-  const target = new Date("2026-04-17T20:00:00-04:00");
+  const nextShow = useMemo(() => {
+    const now = Date.now();
+    return (
+      TOUR_DATES.find((s) => new Date(s.iso).getTime() > now) ??
+      TOUR_DATES[TOUR_DATES.length - 1]
+    );
+  }, []);
+  const target = new Date(nextShow.iso);
   const { d, h, m, s } = useCountdown(target);
   const [scrollY, setScrollY] = useState(0);
 
@@ -76,12 +97,12 @@ export function Hero({ onClaim }: { onClaim: () => void }) {
 
         <div className="mt-10 grid md:grid-cols-2 gap-8 items-end">
           <div>
-            <div className="label text-dust/60 mb-2">Opening Night</div>
-            <div className="text-dust text-xl md:text-2xl font-bold">
-              17 · APRIL · 2026
+            <div className="label text-dust/60 mb-2">Next Show</div>
+            <div className="text-dust text-xl md:text-2xl font-bold uppercase">
+              {target.toLocaleDateString("en-US", { day: "2-digit", month: "long", year: "numeric" }).replace(/,/g, " ·").replace(/\s+/g, " · ")}
             </div>
             <div className="text-dust/70 text-sm mt-1">
-              Neyland Stadium · Knoxville, Tennessee
+              {nextShow.venue} · {nextShow.city}
             </div>
             <button
               onClick={onClaim}
@@ -94,7 +115,7 @@ export function Hero({ onClaim }: { onClaim: () => void }) {
           </div>
 
           <div className="border-2 border-chrome/40 bg-midnight-deep/70 backdrop-blur-sm p-6">
-            <div className="label text-caution mb-4">First Pitch · T-Minus</div>
+            <div className="label text-caution mb-4">Next Pitch · T-Minus</div>
             <div className="grid grid-cols-4 gap-2 font-display text-dust">
               {[
                 ["DAYS", d],

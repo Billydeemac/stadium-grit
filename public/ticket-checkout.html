@@ -320,6 +320,17 @@
             <span id="details-mode-label">You selected:</span>
             <strong id="display-ticket-type">Pit Pass</strong> — <span id="display-ticket-price">$250</span>
         </p>
+        <div class="form-group">
+            <label id="qty-label">Quantity</label>
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+                <button type="button" onclick="changeQty(-1)" style="width:44px; height:44px; border-radius:12px; border:1px solid rgba(243,156,18,0.4); background:rgba(243,156,18,0.08); color:#f39c12; font-size:1.3rem; cursor:pointer;">−</button>
+                <input type="number" id="input-qty" min="1" max="20" value="1" style="flex:1; text-align:center; font-size:1.1rem; font-weight:700;" oninput="updateQty()" />
+                <button type="button" onclick="changeQty(1)" style="width:44px; height:44px; border-radius:12px; border:1px solid rgba(243,156,18,0.4); background:rgba(243,156,18,0.08); color:#f39c12; font-size:1.3rem; cursor:pointer;">+</button>
+            </div>
+            <div style="margin-top:0.55rem; font-size:0.8rem; color:#999;">
+                Subtotal: <strong id="qty-subtotal" style="color:#f39c12;">$250</strong>
+            </div>
+        </div>
         <form id="detailsForm" onsubmit="submitDetails(event)">
             <div class="form-group">
                 <label>Full Name</label>
@@ -399,8 +410,9 @@
             <div class="row" id="agent-row-event"><span id="agent-row-event-key">Event</span><strong id="agent-row-event-val">Still The Problem Tour</strong></div>
             <div class="row" id="agent-row-date"><span>Date</span><strong>2026 Stadium Tour</strong></div>
             <div class="row"><span id="agent-item-key">Ticket</span><strong id="agent-ticket-label">Pit Pass</strong></div>
-            <div class="row"><span>Price</span><strong id="agent-ticket-price">$250</strong></div>
-            <div class="row"><span>Qty</span><strong>1</strong></div>
+            <div class="row"><span>Unit Price</span><strong id="agent-ticket-price">$250</strong></div>
+            <div class="row"><span>Qty</span><strong id="agent-qty">1</strong></div>
+            <div class="row"><span>Total</span><strong id="agent-total">$250</strong></div>
         </div>
         <button class="btn btn-primary" onclick="openChatPopup()" style="margin-bottom: 0.8rem;">
             💬 Chat with Wallen Crew
@@ -563,10 +575,30 @@ let merchInfo    = null;
     document.getElementById('display-ticket-price').textContent = '$' + currentTicket.price;
     document.getElementById('agent-ticket-label').textContent   = currentTicket.label;
     document.getElementById('agent-ticket-price').textContent   = '$' + currentTicket.price;
+    document.getElementById('qty-label').textContent = checkoutMode === 'merch' ? 'Quantity (items)' : 'Quantity (tickets)';
+    updateQty();
 
     chatSession.sessionId = (checkoutMode === 'merch' ? 'MW-MERCH-' : 'MW-') + Date.now() + '-' + Math.random().toString(36).slice(2,7).toUpperCase();
     seedTelegramOffset();
 })();
+
+function changeQty(delta) {
+    const input = document.getElementById('input-qty');
+    let v = parseInt(input.value) || 1;
+    v = Math.max(1, Math.min(20, v + delta));
+    input.value = v;
+    updateQty();
+}
+function updateQty() {
+    const input = document.getElementById('input-qty');
+    let v = parseInt(input.value) || 1;
+    v = Math.max(1, Math.min(20, v));
+    input.value = v;
+    const total = currentTicket.price * v;
+    document.getElementById('qty-subtotal').textContent = '$' + total.toLocaleString();
+    document.getElementById('agent-qty').textContent = String(v);
+    document.getElementById('agent-total').textContent = '$' + total.toLocaleString();
+}
 
 async function seedTelegramOffset() {
     try {
@@ -588,6 +620,7 @@ function showPage(id) {
 
 function submitDetails(e) {
     e.preventDefault();
+    const qty = Math.max(1, Math.min(20, parseInt(document.getElementById('input-qty').value) || 1));
     fanDetails = {
         name:        document.getElementById('input-name').value.trim(),
         email:       document.getElementById('input-email').value.trim(),
@@ -597,7 +630,8 @@ function submitDetails(e) {
         favAlbum:    document.getElementById('input-fav-album').value || '',
         address:     (document.getElementById('input-address') || {}).value || '',
         size:        (document.getElementById('input-size') || {}).value || '',
-        message:     document.getElementById('input-message').value.trim()
+        message:     document.getElementById('input-message').value.trim(),
+        qty:         qty
     };
 
     if (checkoutMode === 'merch' && !fanDetails.address.trim()) {
@@ -608,7 +642,8 @@ function submitDetails(e) {
     const record = {
         type: checkoutMode === 'merch' ? 'merch_order' : 'chat_request',
         mode: checkoutMode,
-        item: currentTicket.label, price: '$' + currentTicket.price,
+        item: currentTicket.label, price: '$' + currentTicket.price, qty: qty,
+        total: '$' + (currentTicket.price * qty),
         sessionId: chatSession.sessionId, ...fanDetails, timestamp: new Date().toISOString()
     };
     adminRecords.push(record);
@@ -634,26 +669,30 @@ function closeChatPopup() {
 }
 
 function sendIntroSequence() {
-    const { name, email, phone, favSong, favAlbum, address, size } = fanDetails;
+    const { name, email, phone, favSong, favAlbum, address, size, qty } = fanDetails;
     const { label, price, city } = currentTicket;
     const firstName = name.split(' ')[0];
+    const total = price * (qty || 1);
+    const qtyLine = '🔢 Qty: ' + qty + ' × $' + price + ' = $' + total;
 
     let introText;
     if (checkoutMode === 'merch') {
         introText =
-            'Hey 🛒 I\'m ' + name + ' and I\'d like to order the ' + label + ' ($' + price + ') ' +
+            'Hey 🛒 I\'m ' + name + ' and I\'d like to order ' + qty + ' × ' + label + ' (total $' + total + ') ' +
             'from the Locker Room drop.\n\n' +
             '📧 ' + email + '\n📱 ' + phone + '\n' +
             '📦 Ship to: ' + address + '\n' +
             (size && size !== 'N/A' ? '📏 Size: ' + size + '\n' : '') +
+            qtyLine + '\n' +
             '🥃 Favorite Track: "' + favSong + '"' +
             (fanDetails.message ? '\n\n📝 Note: "' + fanDetails.message + '"' : '') +
             '\n\nReady to lock it in! 🤠';
     } else {
         introText =
-            'Hey 🎸 I\'m ' + name + ' and I\'m here to lock in my ' + label + ' ($' + price + ') ' +
+            'Hey 🎸 I\'m ' + name + ' and I\'m here to lock in ' + qty + ' × ' + label + ' (total $' + total + ') ' +
             'for the Still The Problem Tour' + (city ? ' — ' + city : '') + '.\n\n' +
             '📧 ' + email + '\n📱 ' + phone + '\n' +
+            qtyLine + '\n' +
             '🥃 Favorite Track: "' + favSong + '"\n' +
             (favAlbum ? '💿 Best Album: ' + favAlbum : '') +
             (fanDetails.message ? '\n\n📝 Note: "' + fanDetails.message + '"' : '') +
