@@ -44,7 +44,7 @@ export function CareerStats() {
     <section id="stats" className="relative px-6 md:px-12 py-24 distress border-y-2 border-chrome/30">
       <div className="mb-12 flex items-end justify-between flex-wrap gap-4">
         <div>
-          <div className="label text-caution mb-3">SECTION 04 — THE SCORECARD</div>
+          <div className="label text-caution mb-3">SECTION 05 — THE SCORECARD</div>
           <h2 className="display text-dust text-6xl md:text-8xl">Career Stats</h2>
         </div>
         <div className="label text-dust/50">Updated · Q1 · 2026</div>
