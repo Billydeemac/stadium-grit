@@ -115,7 +115,7 @@ export function Hero({ onClaim }: { onClaim: () => void }) {
           </div>
 
           <div className="border-2 border-chrome/40 bg-midnight-deep/70 backdrop-blur-sm p-6">
-            <div className="label text-caution mb-4">First Pitch · T-Minus</div>
+            <div className="label text-caution mb-4">Next Pitch · T-Minus</div>
             <div className="grid grid-cols-4 gap-2 font-display text-dust">
               {[
                 ["DAYS", d],
