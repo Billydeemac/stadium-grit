@@ -13,6 +13,22 @@ const ITEMS = [
   { name: "7 Summers Whiskey Glass", price: "$32", tag: "PAIR", img: glass },
   { name: "Still The Problem Tour Vinyl", price: "$48", tag: "GOLD", img: vinyl },
   { name: "Wallen Field Jersey", price: "$120", tag: "VIP ONLY", img: jersey },
+  { name: "Sleeveless 'Pit' Flannel", price: "$65", tag: "PIT", img: merch },
+  { name: "Workwear Canvas Vest", price: "$120", tag: "HEAVY", img: merch },
+  { name: "Graphic Bandana Set", price: "$28", tag: "SET", img: merch },
+  { name: "Leather Flask", price: "$40", tag: "", img: merch },
+  { name: "Numbered Tour Poster", price: "$75", tag: "NUMBERED", img: merch },
+  { name: "Camo 'Mullet' Beanie", price: "$38", tag: "CAMO", img: merch },
+  { name: "Leather-Wrapped Flask", price: "$55", tag: "", img: merch },
+  { name: "Embossed Metal License Plate", price: "$35", tag: "", img: merch },
+  { name: "Stadium Seat Cushion", price: "$30", tag: "", img: merch },
+  { name: "Clear Concert Tote", price: "$25", tag: "STADIUM OK", img: merch },
+  { name: "Stadium Warm-Up Jacket", price: "$140", tag: "NEW", img: merch },
+  { name: "Distressed 'MW' Baseball Cap", price: "$42", tag: "", img: merch },
+  { name: "Leather Baseball Glove", price: "$110", tag: "LIMITED", img: merch },
+  { name: "City-Specific 'Lineup' Pennant", price: "$32", tag: "PER CITY", img: merch },
+  { name: "'The Pit' Survival Kit", price: "$48", tag: "GA NIGHTS", img: merch },
+  { name: "Commemorative Tour Laminate", price: "$55", tag: "REPLICA", img: merch },
 ];
 
 export function LockerRoom() {
