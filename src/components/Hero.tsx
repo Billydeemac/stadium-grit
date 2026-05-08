@@ -97,12 +97,12 @@ export function Hero({ onClaim }: { onClaim: () => void }) {
 
         <div className="mt-10 grid md:grid-cols-2 gap-8 items-end">
           <div>
-            <div className="label text-dust/60 mb-2">Opening Night</div>
-            <div className="text-dust text-xl md:text-2xl font-bold">
-              17 · APRIL · 2026
+            <div className="label text-dust/60 mb-2">Next Show</div>
+            <div className="text-dust text-xl md:text-2xl font-bold uppercase">
+              {target.toLocaleDateString("en-US", { day: "2-digit", month: "long", year: "numeric" }).replace(/,/g, " ·").replace(/\s+/g, " · ")}
             </div>
             <div className="text-dust/70 text-sm mt-1">
-              Neyland Stadium · Knoxville, Tennessee
+              {nextShow.venue} · {nextShow.city}
             </div>
             <button
               onClick={onClaim}
