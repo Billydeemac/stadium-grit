@@ -32,6 +32,9 @@ const ITEMS = [
 ];
 
 export function LockerRoom() {
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? ITEMS : ITEMS.slice(0, 6);
+  const hiddenCount = ITEMS.length - 6;
   return (
     <section id="locker" className="relative px-6 md:px-12 py-24 distress bg-midnight-deep">
       <div className="grid lg:grid-cols-2 gap-12 mb-16">
