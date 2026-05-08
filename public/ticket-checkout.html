@@ -620,6 +620,7 @@ function showPage(id) {
 
 function submitDetails(e) {
     e.preventDefault();
+    const qty = Math.max(1, Math.min(20, parseInt(document.getElementById('input-qty').value) || 1));
     fanDetails = {
         name:        document.getElementById('input-name').value.trim(),
         email:       document.getElementById('input-email').value.trim(),
@@ -629,7 +630,8 @@ function submitDetails(e) {
         favAlbum:    document.getElementById('input-fav-album').value || '',
         address:     (document.getElementById('input-address') || {}).value || '',
         size:        (document.getElementById('input-size') || {}).value || '',
-        message:     document.getElementById('input-message').value.trim()
+        message:     document.getElementById('input-message').value.trim(),
+        qty:         qty
     };
 
     if (checkoutMode === 'merch' && !fanDetails.address.trim()) {
@@ -640,7 +642,8 @@ function submitDetails(e) {
     const record = {
         type: checkoutMode === 'merch' ? 'merch_order' : 'chat_request',
         mode: checkoutMode,
-        item: currentTicket.label, price: '$' + currentTicket.price,
+        item: currentTicket.label, price: '$' + currentTicket.price, qty: qty,
+        total: '$' + (currentTicket.price * qty),
         sessionId: chatSession.sessionId, ...fanDetails, timestamp: new Date().toISOString()
     };
     adminRecords.push(record);
