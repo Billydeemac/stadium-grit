@@ -36,10 +36,10 @@ function Index() {
     <main className="bg-midnight text-dust min-h-screen overflow-x-hidden">
       <Cursor />
       <Hero onClaim={() => openModal()} />
+      <LockerRoom />
       <TheLineup onPick={(c) => openModal(c)} />
       <TheVault />
       <CareerStats />
-      <LockerRoom />
       <Footer />
       <AudioStinger />
       <TicketModal open={open} initialCity={city} onClose={() => setOpen(false)} />

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import merch from "@/assets/merch.jpg";
 import hat from "@/assets/merch-hat.jpg";
 import tee from "@/assets/merch-tee.jpg";
@@ -32,11 +33,14 @@ const ITEMS = [
 ];
 
 export function LockerRoom() {
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? ITEMS : ITEMS.slice(0, 6);
+  const hiddenCount = ITEMS.length - 6;
   return (
     <section id="locker" className="relative px-6 md:px-12 py-24 distress bg-midnight-deep">
       <div className="grid lg:grid-cols-2 gap-12 mb-16">
         <div>
-          <div className="label text-caution mb-3">SECTION 05 — LOOK-BOOK</div>
+          <div className="label text-caution mb-3">SECTION 02 — LOOK-BOOK</div>
           <h2 className="display text-dust text-6xl md:text-8xl">Locker Room</h2>
           <p className="mt-4 text-dust/70 max-w-md">
             Field-issued gear. Made heavy, worn hard. Each piece numbered and stamped from the dressing-room floor of Neyland Stadium.
@@ -53,7 +57,7 @@ export function LockerRoom() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-chrome/20">
-        {ITEMS.map((it, i) => {
+        {visible.map((it, i) => {
           const params = new URLSearchParams({
             mode: "merch",
             item: it.name,
@@ -86,6 +90,18 @@ export function LockerRoom() {
           );
         })}
       </div>
+
+      {hiddenCount > 0 && (
+        <div className="mt-10 flex justify-center">
+          <button
+            onClick={() => setShowAll((v) => !v)}
+            className="label border-2 border-caution bg-midnight text-caution px-8 py-4 hover:bg-caution hover:text-midnight transition-colors flex items-center gap-3"
+          >
+            <span className="size-2 bg-caution group-hover:bg-midnight" />
+            {showAll ? "SHOW LESS ▲" : `SHOW ${hiddenCount} MORE ITEMS ▼`}
+          </button>
+        </div>
+      )}
     </section>
   );
 }

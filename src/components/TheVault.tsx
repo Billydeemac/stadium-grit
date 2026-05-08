@@ -53,7 +53,7 @@ export function TheVault() {
   return (
     <section id="vault" className="relative px-6 md:px-12 py-24 bg-midnight-deep distress">
       <div className="mb-14">
-        <div className="label text-caution mb-3">SECTION 03 — DISCOGRAPHY</div>
+        <div className="label text-caution mb-3">SECTION 04 — DISCOGRAPHY</div>
         <h2 className="display text-dust text-6xl md:text-8xl">The Vault</h2>
         <p className="label text-dust/60 mt-4 max-w-xl">
           TAP ANY RECORD — ROUTES TO YOUR STREAMING APP OF CHOICE.

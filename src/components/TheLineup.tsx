@@ -33,7 +33,7 @@ export function TheLineup({ onPick }: { onPick: (city: string) => void }) {
     <section id="lineup" className="relative px-6 md:px-12 py-24 distress">
       <div className="flex items-end justify-between mb-12 flex-wrap gap-6">
         <div>
-          <div className="label text-caution mb-3">SECTION 02 — TOUR REGISTRY</div>
+          <div className="label text-caution mb-3">SECTION 03 — TOUR REGISTRY</div>
           <h2 className="display text-dust text-6xl md:text-8xl">The Lineup</h2>
           <p className="mt-3 text-dust/60 max-w-md">A coast-to-coast manifest of stadium nights. Read it like a scoreboard.</p>
         </div>
