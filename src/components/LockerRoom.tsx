@@ -6,6 +6,22 @@ import hoodie from "@/assets/merch-hoodie.jpg";
 import glass from "@/assets/merch-glass.jpg";
 import vinyl from "@/assets/merch-vinyl.jpg";
 import jersey from "@/assets/merch-jersey.jpg";
+import flannel from "@/assets/merch-flannel.jpg";
+import vest from "@/assets/merch-vest.jpg";
+import bandana from "@/assets/merch-bandana.jpg";
+import flask from "@/assets/merch-flask.jpg";
+import poster from "@/assets/merch-poster.jpg";
+import beanie from "@/assets/merch-beanie.jpg";
+import leatherflask from "@/assets/merch-leatherflask.jpg";
+import plate from "@/assets/merch-plate.jpg";
+import cushion from "@/assets/merch-cushion.jpg";
+import tote from "@/assets/merch-tote.jpg";
+import jacket from "@/assets/merch-jacket.jpg";
+import cap from "@/assets/merch-cap.jpg";
+import glove from "@/assets/merch-glove.jpg";
+import pennant from "@/assets/merch-pennant.jpg";
+import kit from "@/assets/merch-kit.jpg";
+import laminate from "@/assets/merch-laminate.jpg";
 
 const ITEMS = [
   { name: "Still The Problem Trucker", price: "$45", tag: "LIMITED", img: hat },
@@ -14,22 +30,22 @@ const ITEMS = [
   { name: "7 Summers Whiskey Glass", price: "$32", tag: "PAIR", img: glass },
   { name: "Still The Problem Tour Vinyl", price: "$48", tag: "GOLD", img: vinyl },
   { name: "Wallen Field Jersey", price: "$120", tag: "VIP ONLY", img: jersey },
-  { name: "Sleeveless 'Pit' Flannel", price: "$65", tag: "PIT", img: merch },
-  { name: "Workwear Canvas Vest", price: "$120", tag: "HEAVY", img: merch },
-  { name: "Graphic Bandana Set", price: "$28", tag: "SET", img: merch },
-  { name: "Leather Flask", price: "$40", tag: "", img: merch },
-  { name: "Numbered Tour Poster", price: "$75", tag: "NUMBERED", img: merch },
-  { name: "Camo 'Mullet' Beanie", price: "$38", tag: "CAMO", img: merch },
-  { name: "Leather-Wrapped Flask", price: "$55", tag: "", img: merch },
-  { name: "Embossed Metal License Plate", price: "$35", tag: "", img: merch },
-  { name: "Stadium Seat Cushion", price: "$30", tag: "", img: merch },
-  { name: "Clear Concert Tote", price: "$25", tag: "STADIUM OK", img: merch },
-  { name: "Stadium Warm-Up Jacket", price: "$140", tag: "NEW", img: merch },
-  { name: "Distressed 'MW' Baseball Cap", price: "$42", tag: "", img: merch },
-  { name: "Leather Baseball Glove", price: "$110", tag: "LIMITED", img: merch },
-  { name: "City-Specific 'Lineup' Pennant", price: "$32", tag: "PER CITY", img: merch },
-  { name: "'The Pit' Survival Kit", price: "$48", tag: "GA NIGHTS", img: merch },
-  { name: "Commemorative Tour Laminate", price: "$55", tag: "REPLICA", img: merch },
+  { name: "Sleeveless 'Pit' Flannel", price: "$65", tag: "PIT", img: flannel },
+  { name: "Workwear Canvas Vest", price: "$120", tag: "HEAVY", img: vest },
+  { name: "Graphic Bandana Set", price: "$28", tag: "SET", img: bandana },
+  { name: "Leather Flask", price: "$40", tag: "", img: flask },
+  { name: "Numbered Tour Poster", price: "$75", tag: "NUMBERED", img: poster },
+  { name: "Camo 'Mullet' Beanie", price: "$38", tag: "CAMO", img: beanie },
+  { name: "Leather-Wrapped Flask", price: "$55", tag: "", img: leatherflask },
+  { name: "Embossed Metal License Plate", price: "$35", tag: "", img: plate },
+  { name: "Stadium Seat Cushion", price: "$30", tag: "", img: cushion },
+  { name: "Clear Concert Tote", price: "$25", tag: "STADIUM OK", img: tote },
+  { name: "Stadium Warm-Up Jacket", price: "$140", tag: "NEW", img: jacket },
+  { name: "Distressed 'MW' Baseball Cap", price: "$42", tag: "", img: cap },
+  { name: "Leather Baseball Glove", price: "$110", tag: "LIMITED", img: glove },
+  { name: "City-Specific 'Lineup' Pennant", price: "$32", tag: "PER CITY", img: pennant },
+  { name: "'The Pit' Survival Kit", price: "$48", tag: "GA NIGHTS", img: kit },
+  { name: "Commemorative Tour Laminate", price: "$55", tag: "REPLICA", img: laminate },
 ];
 
 export function LockerRoom() {
