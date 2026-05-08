@@ -57,7 +57,7 @@ export function LockerRoom() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-chrome/20">
-        {ITEMS.map((it, i) => {
+        {visible.map((it, i) => {
           const params = new URLSearchParams({
             mode: "merch",
             item: it.name,
@@ -90,6 +90,18 @@ export function LockerRoom() {
           );
         })}
       </div>
+
+      {hiddenCount > 0 && (
+        <div className="mt-10 flex justify-center">
+          <button
+            onClick={() => setShowAll((v) => !v)}
+            className="label border-2 border-caution bg-midnight text-caution px-8 py-4 hover:bg-caution hover:text-midnight transition-colors flex items-center gap-3"
+          >
+            <span className="size-2 bg-caution group-hover:bg-midnight" />
+            {showAll ? "SHOW LESS ▲" : `SHOW ${hiddenCount} MORE ITEMS ▼`}
+          </button>
+        </div>
+      )}
     </section>
   );
 }
