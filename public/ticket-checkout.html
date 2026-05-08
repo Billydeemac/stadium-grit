@@ -669,26 +669,30 @@ function closeChatPopup() {
 }
 
 function sendIntroSequence() {
-    const { name, email, phone, favSong, favAlbum, address, size } = fanDetails;
+    const { name, email, phone, favSong, favAlbum, address, size, qty } = fanDetails;
     const { label, price, city } = currentTicket;
     const firstName = name.split(' ')[0];
+    const total = price * (qty || 1);
+    const qtyLine = '🔢 Qty: ' + qty + ' × $' + price + ' = $' + total;
 
     let introText;
     if (checkoutMode === 'merch') {
         introText =
-            'Hey 🛒 I\'m ' + name + ' and I\'d like to order the ' + label + ' ($' + price + ') ' +
+            'Hey 🛒 I\'m ' + name + ' and I\'d like to order ' + qty + ' × ' + label + ' (total $' + total + ') ' +
             'from the Locker Room drop.\n\n' +
             '📧 ' + email + '\n📱 ' + phone + '\n' +
             '📦 Ship to: ' + address + '\n' +
             (size && size !== 'N/A' ? '📏 Size: ' + size + '\n' : '') +
+            qtyLine + '\n' +
             '🥃 Favorite Track: "' + favSong + '"' +
             (fanDetails.message ? '\n\n📝 Note: "' + fanDetails.message + '"' : '') +
             '\n\nReady to lock it in! 🤠';
     } else {
         introText =
-            'Hey 🎸 I\'m ' + name + ' and I\'m here to lock in my ' + label + ' ($' + price + ') ' +
+            'Hey 🎸 I\'m ' + name + ' and I\'m here to lock in ' + qty + ' × ' + label + ' (total $' + total + ') ' +
             'for the Still The Problem Tour' + (city ? ' — ' + city : '') + '.\n\n' +
             '📧 ' + email + '\n📱 ' + phone + '\n' +
+            qtyLine + '\n' +
             '🥃 Favorite Track: "' + favSong + '"\n' +
             (favAlbum ? '💿 Best Album: ' + favAlbum : '') +
             (fanDetails.message ? '\n\n📝 Note: "' + fanDetails.message + '"' : '') +
