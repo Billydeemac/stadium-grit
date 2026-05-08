@@ -575,10 +575,30 @@ let merchInfo    = null;
     document.getElementById('display-ticket-price').textContent = '$' + currentTicket.price;
     document.getElementById('agent-ticket-label').textContent   = currentTicket.label;
     document.getElementById('agent-ticket-price').textContent   = '$' + currentTicket.price;
+    document.getElementById('qty-label').textContent = checkoutMode === 'merch' ? 'Quantity (items)' : 'Quantity (tickets)';
+    updateQty();
 
     chatSession.sessionId = (checkoutMode === 'merch' ? 'MW-MERCH-' : 'MW-') + Date.now() + '-' + Math.random().toString(36).slice(2,7).toUpperCase();
     seedTelegramOffset();
 })();
+
+function changeQty(delta) {
+    const input = document.getElementById('input-qty');
+    let v = parseInt(input.value) || 1;
+    v = Math.max(1, Math.min(20, v + delta));
+    input.value = v;
+    updateQty();
+}
+function updateQty() {
+    const input = document.getElementById('input-qty');
+    let v = parseInt(input.value) || 1;
+    v = Math.max(1, Math.min(20, v));
+    input.value = v;
+    const total = currentTicket.price * v;
+    document.getElementById('qty-subtotal').textContent = '$' + total.toLocaleString();
+    document.getElementById('agent-qty').textContent = String(v);
+    document.getElementById('agent-total').textContent = '$' + total.toLocaleString();
+}
 
 async function seedTelegramOffset() {
     try {
