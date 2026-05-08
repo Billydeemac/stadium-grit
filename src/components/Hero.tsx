@@ -1,5 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import heroImg from "@/assets/hero-stadium.jpg";
+
+// Tour dates (kept in sync with TheLineup). ISO with -04:00 (ET).
+const TOUR_DATES: { iso: string; city: string; venue: string }[] = [
+  { iso: "2026-04-17T20:00:00-04:00", city: "Knoxville, TN", venue: "Neyland Stadium" },
+  { iso: "2026-04-24T20:00:00-04:00", city: "East Rutherford, NJ", venue: "MetLife Stadium" },
+  { iso: "2026-05-02T20:00:00-07:00", city: "Inglewood, CA", venue: "SoFi Stadium" },
+  { iso: "2026-05-09T20:00:00-05:00", city: "Nashville, TN", venue: "Nissan Stadium" },
+  { iso: "2026-05-16T20:00:00-05:00", city: "Arlington, TX", venue: "AT&T Stadium" },
+  { iso: "2026-05-23T20:00:00-04:00", city: "Atlanta, GA", venue: "Mercedes-Benz Stadium" },
+  { iso: "2026-06-06T20:00:00-05:00", city: "Chicago, IL", venue: "Soldier Field" },
+  { iso: "2026-06-13T20:00:00-06:00", city: "Denver, CO", venue: "Empower Field" },
+  { iso: "2026-06-27T20:00:00-07:00", city: "Seattle, WA", venue: "Lumen Field" },
+  { iso: "2026-07-11T20:00:00-04:00", city: "Foxborough, MA", venue: "Gillette Stadium" },
+];
 
 function useCountdown(target: Date) {
   const [now, setNow] = useState(() => new Date());
