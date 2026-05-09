@@ -17,9 +17,12 @@ export function Footer() {
         <div>
           <div className="label text-dust/50 mb-3">FOLLOW</div>
           <ul className="space-y-2 text-dust">
-            <li><a className="hover:text-caution">Instagram</a></li>
-            <li><a className="hover:text-caution">YouTube</a></li>
-            <li><a className="hover:text-caution">Spotify</a></li>
+            <li><a href="https://www.instagram.com/morganwallen/" target="_blank" rel="noopener noreferrer" className="hover:text-caution">Instagram</a></li>
+            <li><a href="https://www.youtube.com/@morganwallen" target="_blank" rel="noopener noreferrer" className="hover:text-caution">YouTube</a></li>
+            <li><a href="https://open.spotify.com/artist/4oUHIQIBe0LHzYfvXNW4QM" target="_blank" rel="noopener noreferrer" className="hover:text-caution">Spotify</a></li>
+            <li><a href="https://www.tiktok.com/@morganwallen" target="_blank" rel="noopener noreferrer" className="hover:text-caution">TikTok</a></li>
+            <li><a href="https://x.com/MorganWallen" target="_blank" rel="noopener noreferrer" className="hover:text-caution">X (Twitter)</a></li>
+            <li><a href="https://www.facebook.com/MorganWallen" target="_blank" rel="noopener noreferrer" className="hover:text-caution">Facebook</a></li>
           </ul>
         </div>
       </div>
