@@ -103,17 +103,29 @@ export function TicketModal({
                 <p className="label text-caution mb-8">DESTINATION · {city}</p>
                 <div className="space-y-3">
                   {TIERS.map((t, i) => (
-                    <div key={t.name} className="ticket-stub border-2 border-chrome/30 hover:border-caution transition-colors p-5 flex flex-col md:flex-row md:items-center gap-4">
-                      <div className="display text-caution text-5xl tabular-nums w-16">{String(i + 1).padStart(2, "0")}</div>
+                    <div
+                      key={t.name}
+                      className={
+                        t.featured
+                          ? "relative ticket-stub border-2 border-caution bg-caution/10 shadow-[0_0_40px_-5px_var(--caution)] p-6 flex flex-col md:flex-row md:items-center gap-4"
+                          : "ticket-stub border-2 border-chrome/30 hover:border-caution transition-colors p-5 flex flex-col md:flex-row md:items-center gap-4"
+                      }
+                    >
+                      {t.featured && (
+                        <span className="absolute -top-3 left-6 bg-caution text-midnight label px-2 py-1 animate-flicker">
+                          ★ MOST WANTED ★
+                        </span>
+                      )}
+                      <div className={`display tabular-nums w-16 text-caution ${t.featured ? "text-6xl" : "text-5xl"}`}>{String(i + 1).padStart(2, "0")}</div>
                       <div className="flex-1">
-                        <div className="display text-dust text-2xl">{t.name}</div>
+                        <div className={`display text-dust ${t.featured ? "text-3xl md:text-4xl" : "text-2xl"}`}>{t.name}</div>
                         <div className="label text-caution">{t.sub}</div>
-                        <div className="text-dust/70 text-xs mt-2 font-mono">{t.perks.join(" · ")}</div>
+                        <div className={`text-dust/80 text-xs mt-2 font-mono ${t.featured ? "leading-relaxed" : ""}`}>{t.perks.join(" · ")}</div>
                       </div>
                       <div className="text-right">
-                        <div className="display text-dust text-4xl">${t.price}</div>
-                        <button onClick={() => checkout(t, i)} className="mt-2 label bg-caution text-midnight px-4 py-2 hover:bg-dust">
-                          CLAIM →
+                        <div className={`display text-dust ${t.featured ? "text-5xl" : "text-4xl"}`}>${t.price}</div>
+                        <button onClick={() => checkout(t, i)} className={`mt-2 label bg-caution text-midnight hover:bg-dust ${t.featured ? "font-bold px-6 py-3" : "px-4 py-2"}`}>
+                          {t.featured ? "JOIN THE FAN CARD →" : "CLAIM →"}
                         </button>
                       </div>
                     </div>
