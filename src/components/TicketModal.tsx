@@ -10,8 +10,7 @@ const TIERS = [
   { name: "Long Night VIP", sub: "Tier II", price: 550, perks: ["Pit access", "Early entry", "Hat + merch bundle"] },
   { name: "Broad Shoulders Lounge", sub: "Tier III", price: 950, perks: ["Premium viewing deck", "Open whiskey bar", "Private restrooms"] },
   { name: "The Starting Lineup", sub: "Tier IV", price: 2000, perks: ["On-stage viewing (3 songs)", "Backstage tour", "Signed jersey"] },
-  { name: "The 7 Summers Ultimate", sub: "Tier V", price: 4500, perks: ["Front row", "Personal meet & greet", "Whiskey tasting w/ band", "Custom acoustic guitar"] },
-  { name: "The Fan Card", sub: "All-Access Season Pass", price: 2500, perks: ["Free entry to all 2026 tour stops", "Meet & greet at any show", "Priority pit access", "Annual signed merch drop", "Exclusive fan-only livestreams", "Early ticket windows for future tours", "10% off all merch & vault items", "Birthday voice note from Morgan", "Members-only Discord + app badge", "Soundcheck access (select shows)"] },
+  { name: "The Fan Card", sub: "All-Access Season Pass · Tier V", price: 5000, featured: true, perks: ["Free entry to ALL 2026 tour stops", "Front row at any show you choose", "Personal meet & greet (every city)", "Whiskey tasting with the band", "Custom signed acoustic guitar", "Annual signed merch drop", "Priority pit + on-stage viewing (3 songs)", "Backstage tour & soundcheck access", "Exclusive fan-only livestreams", "Early ticket windows for future tours", "20% off all merch & vault items", "Birthday voice note from Morgan", "Members-only Discord + app badge", "Concierge text line for travel & lodging"] },
 ];
 
 export function TicketModal({
