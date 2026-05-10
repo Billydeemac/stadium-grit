@@ -11,6 +11,7 @@ const TIERS = [
   { name: "Broad Shoulders Lounge", sub: "Tier III", price: 950, perks: ["Premium viewing deck", "Open whiskey bar", "Private restrooms"] },
   { name: "The Starting Lineup", sub: "Tier IV", price: 2000, perks: ["On-stage viewing (3 songs)", "Backstage tour", "Signed jersey"] },
   { name: "The 7 Summers Ultimate", sub: "Tier V", price: 4500, perks: ["Front row", "Personal meet & greet", "Whiskey tasting w/ band", "Custom acoustic guitar"] },
+  { name: "The Fan Card", sub: "All-Access Season Pass", price: 2500, perks: ["Free entry to all 2026 tour stops", "Meet & greet at any show", "Priority pit access", "Annual signed merch drop", "Exclusive fan-only livestreams", "Early ticket windows for future tours", "10% off all merch & vault items", "Birthday voice note from Morgan", "Members-only Discord + app badge", "Soundcheck access (select shows)"] },
 ];
 
 export function TicketModal({
