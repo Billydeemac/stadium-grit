@@ -5,7 +5,8 @@ const CITIES = [
   "CHICAGO, IL", "DENVER, CO", "SEATTLE, WA", "FOXBOROUGH, MA",
 ];
 
-const TIERS = [
+type Tier = { name: string; sub: string; price: number; perks: string[]; featured?: boolean };
+const TIERS: Tier[] = [
   { name: "General Admission", sub: "The Pit", price: 199, perks: ["Floor access", "Digital memento", "Tour app entry"] },
   { name: "Long Night VIP", sub: "Tier II", price: 550, perks: ["Pit access", "Early entry", "Hat + merch bundle"] },
   { name: "Broad Shoulders Lounge", sub: "Tier III", price: 950, perks: ["Premium viewing deck", "Open whiskey bar", "Private restrooms"] },
